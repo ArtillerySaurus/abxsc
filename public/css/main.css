@@ -1,0 +1,17 @@
+.jumbotron p {
+    display: block;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    font-size: 10px;
+    color: #737373;
+    font-size: 12px;
+    font-weight: 200;
+}
+
+.line-down{
+    border-right: 1px dotted #DDD;
+}
+
+.split-box{
+    padding: 20px;
+}

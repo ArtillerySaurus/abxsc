@@ -13,11 +13,13 @@ class CreateSeasonTable extends Migration
      */
     public function up()
     {
-        Schema::create('season', function (Blueprint $table) {
+        Schema::create('seasons', function (Blueprint $table) {
             $table->increments('id')->unsigned();
+            $table->integer('number');
             $table->string('name', 255);
-            $table->date('date');
+            $table->date('date')->nullable();
             $table->string('map', 255);
+            $table->float('databaseVersion');
             $table->timestamps();
         });
     }
@@ -30,7 +32,7 @@ class CreateSeasonTable extends Migration
     public function down()
     {
         DB::statement('SET FOREIGN_KEY_CHECKS = 0');
-        Schema::dropIfExists('season');
+        Schema::dropIfExists('seasons');
         DB::statement('SET FOREIGN_KEY_CHECKS = 1');
     }
 }

@@ -12,5 +12,16 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
+
+
+Route::get('/home', function () {
+    return view('home');
+});
+
+// Route::get('/seasons', function () {
+//     return view('seasons');
+// });
+
+Route::get('/seasons', 'SeasonController@seasons');

@@ -126,7 +126,13 @@
             <Note />
         </Player>
     </players>
-    <tribes />
+    <tribes>
+      <Tribe>
+        <TribeName>Bayonet</TribeName>
+        <TribeRelation>Friendly</TribeRelation>
+        <Note>Note</Note>
+      </Tribe>
+    </tribes>
     <additionalValues />
     <noteList />
 </CreatureCollection>

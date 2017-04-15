@@ -13,7 +13,7 @@ class CreateTribeTable extends Migration
      */
     public function up()
     {
-        Schema::create('tribe', function (Blueprint $table) {
+        Schema::create('tribes', function (Blueprint $table) {
             $table->increments('id')->unsigned();
             $table->string('name', 255);
             $table->string('relation', 255);
@@ -30,7 +30,7 @@ class CreateTribeTable extends Migration
     public function down()
     {
         DB::statement('SET FOREIGN_KEY_CHECKS = 0');
-        Schema::dropIfExists('tribe');
+        Schema::dropIfExists('tribes');
         DB::statement('SET FOREIGN_KEY_CHECKS = 1');
     }
 }

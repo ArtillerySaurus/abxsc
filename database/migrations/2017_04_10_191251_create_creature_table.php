@@ -13,16 +13,17 @@ class CreateCreatureTable extends Migration
      */
     public function up()
     {
-        Schema::create('creature', function (Blueprint $table) {
+        Schema::create('creatures', function (Blueprint $table) {
             $table->increments('id')->unsigned();
+            $table->string('species', 255);
             $table->string('name', 255);
-            $table->integer('gender');
+            $table->string('gender');
             $table->string('status', 255);
-            $table->binary('levelsWild');
-            $table->binary('levelsDom');
+            $table->string('levelsWild');
+            $table->string('levelsDom');
             $table->string('tamingEff');
             $table->string('imprintingBonus');
-            $table->integer('owner');
+            $table->string('owner');
             $table->string('note');
             $table->string('guid');
             $table->integer('isBred');
@@ -47,7 +48,7 @@ class CreateCreatureTable extends Migration
     public function down()
     {
         DB::statement('SET FOREIGN_KEY_CHECKS = 0');
-        Schema::dropIfExists('creature');
+        Schema::dropIfExists('creatures');
         DB::statement('SET FOREIGN_KEY_CHECKS = 1');
     }
 }

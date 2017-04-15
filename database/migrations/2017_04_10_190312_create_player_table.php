@@ -13,10 +13,10 @@ class CreatePlayerTable extends Migration
      */
     public function up()
     {
-        Schema::create('player', function (Blueprint $table) {
+        Schema::create('players', function (Blueprint $table) {
             $table->increments('id')->unsigned();
             $table->string('name', 255);
-            $table->integer('tribe');
+            $table->string('tribe');
             $table->integer('level');
             $table->string('note');
             $table->timestamps();
@@ -31,7 +31,7 @@ class CreatePlayerTable extends Migration
     public function down()
     {
         DB::statement('SET FOREIGN_KEY_CHECKS = 0');
-        Schema::dropIfExists('player');
+        Schema::dropIfExists('players');
         DB::statement('SET FOREIGN_KEY_CHECKS = 1');
     }
 }

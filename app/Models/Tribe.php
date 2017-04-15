@@ -44,7 +44,7 @@ class Tribe extends Model
      *
      * @return mixed
      */
-    public function getRelation()
+    public function getRelationTribe()
     {
         return $this->relation;
     }
@@ -56,7 +56,7 @@ class Tribe extends Model
      *
      * @return self
      */
-    public function setRelation($relation)
+    public function setRelationTribe($relation)
     {
         $this->relation = $relation;
 

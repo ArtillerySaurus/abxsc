@@ -7,6 +7,11 @@ use Redirect;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\File;
 
+use App\Models\Season;
+use App\Models\Tribe;
+use App\Models\Player;
+use App\Models\Creature;
+
 class XmlController extends Controller
 {
 
@@ -76,9 +81,28 @@ class XmlController extends Controller
 
         }catch(Exception $e){
 
-            return Redirect::back()->withErrors(['Iets is ontplofd, programma is klaar met bestaan.']);
+            return Redirect::back()->withErrors(['Iets is ontploft, programma is klaar met bestaan.']);
 
         }
+
+        // Get season.
+        $season = Season::where('number', $form_data['selected-season'])->get();
+
+        // Get models via XML.
+
+        // Get tribe.
+        // $xmlTribes = App\Flight::firstOrCreate(['name' => 'Flight 10']);
+        $xmlTribesProcessed = $this->handleXmlTribes($xmlContent->tribes);
+        // Get players.
+        $xmlPlayersProcessed = $this->handleXmlPlayers($xmlContent->players);
+        // Get creatures.
+        $xmlCreaturesProcessed = $this->handleXmlCreatures($xmlContent->creatures);
+
+        // Save everything.
+
+        // Up season version.
+
+        // Save season.
 
         dd($xmlContent->creatures);
 
@@ -88,6 +112,95 @@ class XmlController extends Controller
 
         }
 
+
+    }
+
+    private function handleXmlTribes($xmlTribes){
+
+        foreach($xmlTribes->children() as $xmlTribe){
+
+            $tribe = Tribe::firstOrNew(['name' => $xmlTribe->TribeName]);
+
+            if(!$tribe->exists){
+
+                $tribe->name = $xmlTribe->TribeName;
+
+            }
+
+            $tribe->relation = $xmlTribe->TribeRelation;
+            $tribe->note     = $xmlTribe->Note;
+
+            $tribe->save();
+
+        }
+
+    }
+
+    private function handleXmlPlayers($xmlPlayers){
+
+        foreach($xmlPlayers->children() as $xmlPlayer){
+
+            $player = Player::firstOrNew(['name' => $xmlPlayer->PlayerName]);
+
+            if(!$player->exists){
+
+                $player->name = $xmlPlayer->PlayerName;
+
+            }
+
+            $player->tribe = $xmlPlayer->Tribe;
+            $player->level = $xmlPlayer->Level;
+            $player->note  = $xmlPlayer->Note;
+
+            $player->save();
+
+        }
+
+    }
+
+    private function handleXmlCreatures($xmlCreatures){
+
+        foreach($xmlCreatures->children() as $xmlCreature){
+
+            $creature = Creature::firstOrNew(['guid' => $xmlCreature->guid]);
+
+            if(!$creature->exists){
+
+                $creature->guid = $xmlCreature->guid;
+
+                $creature->species          = $xmlCreature->species;
+                $creature->name             = $xmlCreature->name;
+                $creature->gender           = $xmlCreature->gender;
+                $creature->status           = $xmlCreature->status;
+                $creature->tamingEff        = $xmlCreature->tamingEff;
+                $creature->imprintingBonus  = $xmlCreature->imprintingBonus;
+                $creature->owner            = $xmlCreature->owner;
+                $creature->note             = $xmlCreature->note;
+                $creature->isBred           = $xmlCreature->isBred;
+                $creature->fatherGuid       = $xmlCreature->fatherGuid;
+                $creature->motherGuid       = $xmlCreature->motherGuid;
+                $creature->generation       = $xmlCreature->generation;
+                $creature->growingUntil     = $xmlCreature->growingUntil;
+                $creature->cooldownUntil    = $xmlCreature->cooldownUntil;
+                $creature->domesticatedAt   = $xmlCreature->domesticatedAt;
+                $creature->neutered         = $xmlCreature->neutered;
+                $creature->mutationCounter  = $xmlCreature->mutationCounter;
+
+                $creature->levelsWild       = serialize((array)$xmlCreature->levelsWild);
+                $creature->levelsDom        = serialize((array)$xmlCreature->levelsDom);
+                $creature->colors           = serialize((array)$xmlCreature->colors);
+
+            }
+
+            $creature->status               = $xmlCreature->status;
+            $creature->owner                = $xmlCreature->owner;
+            $creature->note                 = $xmlCreature->note;
+            $creature->neutered             = $xmlCreature->neutered;
+
+// dd($creature);
+            $creature->save();
+
+        }
 
     }
 

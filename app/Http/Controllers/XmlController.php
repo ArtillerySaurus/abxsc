@@ -68,9 +68,18 @@ class XmlController extends Controller
         }
 
         // Parse file.
-        $xml = File::get($filePath);
+        try{
 
-        $xmlContent = new \SimpleXMLElement($xml);
+            $xml = File::get($filePath);
+
+            $xmlContent = new \SimpleXMLElement($xml);
+
+        }catch(Exception $e){
+
+            return Redirect::back()->withErrors(['Iets is ontplofd, programma is klaar met bestaan.']);
+
+        }
+
         dd($xmlContent->creatures);
 
         if(count($xmlContent->creatures) > 0){

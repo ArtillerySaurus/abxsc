@@ -86,32 +86,29 @@ class XmlController extends Controller
         }
 
         // Get season.
-        $season = Season::where('number', $form_data['selected-season'])->get();
-
-        // Get models via XML.
+        $season = Season::where('number', $form_data['selected-season'])->first();
 
         // Get tribe.
-        // $xmlTribes = App\Flight::firstOrCreate(['name' => 'Flight 10']);
         $xmlTribesProcessed = $this->handleXmlTribes($xmlContent->tribes);
         // Get players.
         $xmlPlayersProcessed = $this->handleXmlPlayers($xmlContent->players);
         // Get creatures.
         $xmlCreaturesProcessed = $this->handleXmlCreatures($xmlContent->creatures);
-
-        // Save everything.
-
         // Up season version.
+        if($season->databaseVersion <= 0){
 
-        // Save season.
+            $season->databaseVersion = 1;
 
-        dd($xmlContent->creatures);
+        }else{
 
-        if(count($xmlContent->creatures) > 0){
-
-
+            $season->databaseVersion =+ 0.1;
 
         }
 
+        // Save season.
+        $season->save();
+
+        return Redirect::back()->withErrors(['Grote kans dat het opgeslagen is!']);// @TODO: Find some other way to do this!
 
     }
 
@@ -197,7 +194,6 @@ class XmlController extends Controller
             $creature->note                 = $xmlCreature->note;
             $creature->neutered             = $xmlCreature->neutered;
 
-// dd($creature);
             $creature->save();
 
         }

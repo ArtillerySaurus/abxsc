@@ -15,7 +15,7 @@ class SeasonTableSeeder extends Seeder
         Season::create([
             'id' => 1,
             'number' => 1,
-            'name' => 'Name',
+            'name' => 'Noobs',
             'map' => "Island",
             'databaseVersion' => 0.0
         ]);
@@ -23,7 +23,7 @@ class SeasonTableSeeder extends Seeder
         Season::create([
             'id' => 2,
             'number' => 2,
-            'name' => 'Name',
+            'name' => 'New base',
             'map' => "Island",
             'databaseVersion' => 0.0
         ]);
@@ -31,7 +31,7 @@ class SeasonTableSeeder extends Seeder
         Season::create([
             'id' => 3,
             'number' => 3,
-            'name' => 'Name',
+            'name' => 'Something different',
             'map' => "The Center",
             'databaseVersion' => 0.0
         ]);
@@ -39,7 +39,7 @@ class SeasonTableSeeder extends Seeder
         Season::create([
             'id' => 4,
             'number' => 4,
-            'name' => 'Name',
+            'name' => 'Opa loos',
             'map' => "Scorched Earth",
             'databaseVersion' => 0.0
         ]);
@@ -47,7 +47,7 @@ class SeasonTableSeeder extends Seeder
         Season::create([
             'id' => 5,
             'number' => 5,
-            'name' => 'Name',
+            'name' => 'A new new beginning',
             'map' => "Island",
             'databaseVersion' => 0.0
         ]);

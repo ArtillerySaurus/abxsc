@@ -7,46 +7,60 @@
 
     <div class="row">
 
+        @if($errors->any())
+
+        <div class="alert alert-danger" role="alert">
+
+            {{$errors->first()}}
+
+        </div>
+
+        @endif
+
         <div class="col-md-6 line-down">
 
             <div class="split-box center-block">
 
-                <div class="form-group">
+                <form action="{{URL::to('/upload')}}" method="POST" enctype="multipart/form-data" class="upload-form"> 
 
-                    <label for="inputXml">File input</label>
-                    <input type="file" id="inputXml">
+                    {{ csrf_field() }}
 
-                    <p class="help-block">
-                        Upload your XML here!
-                    </p>
+                    <div class="form-group">
 
-                    <!-- Split button -->
-                    <div class="btn-group">
+                        <label for="inputXml">File input</label>
+                        <input type="file" name="input-xml" id="input-xml">
 
-                        <input type="submit" class="btn btn-warning" value="Upload and Sync" />
+                        <p class="help-block">
+                            Upload your XML here!
+                        </p>
 
-                        <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <div class="input-group">
 
-                            <span class="caret"></span>
-                            <span class="sr-only">Toggle Dropdown</span>
+                            <select name="selected-season" class="form-control">
 
-                        </button>
+                                @foreach ($seasons as $season)
 
-                        <ul class="dropdown-menu">
+                                <option value="{{$season->number}}">S{{$season->number}}: {{$season->name}}</option>
 
-                            <li><a href="#">Action</a></li>
-                            <li><a href="#">Another action</a></li>
-                            <li><a href="#">Something else here</a></li>
+                                @endforeach
 
-                        </ul>
+                            </select>
 
-                    </div><!--/.btn-group -->
+                            <span class="input-group-btn">
 
-                    <p class="help-block">
-                        Select a season (<span class="caret"></span>) or just press for the latest!
-                    </p>
+                                <input type="submit" name="upload-database" class="btn btn-warning" value="Upload and Sync" />
 
-                </div><!--/.form-group -->
+                            </span><!-- /.input-group-btn -->
+
+                        </div><!-- /.input-group -->
+
+                        <p class="help-block">
+                            Select a season (<span class="caret"></span>) or just press for the latest!
+                        </p>
+
+                    </div><!--/.form-group -->
+
+                </form><!--/.upload-form -->
 
             </div><!--/.split-box -->
 
@@ -57,27 +71,25 @@
 
             <div class="split-box center-block">
 
-                <!-- Split button -->
-                <div class="btn-group">
+                <div class="input-group">
 
-                    <button type="button" class="btn btn-success">Download XML</button>
+                    <select name="selected-season" class="form-control">
 
-                    <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        @foreach ($seasons as $season)
 
-                        <span class="caret"></span>
-                        <span class="sr-only">Toggle Dropdown</span>
+                        <option value="{{$season->number}}">S{{$season->number}}: {{$season->name}}</option>
 
-                    </button>
+                        @endforeach
 
-                    <ul class="dropdown-menu">
+                    </select>
 
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
+                    <span class="input-group-btn">
 
-                    </ul>
+                        <input type="submit" name="upload-database" class="btn btn-success" value="Download XML" />
 
-                </div><!--/.btn-group -->
+                    </span><!-- /.input-group-btn -->
+
+                </div><!-- /.input-group -->
 
                 <p class="help-block">
                     Select a season (<span class="caret"></span>) or just press for the latest!

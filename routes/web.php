@@ -15,13 +15,7 @@ Route::get('/', function () {
     return view('index');
 });
 
-
-Route::get('/home', function () {
-    return view('home');
-});
-
-// Route::get('/seasons', function () {
-//     return view('seasons');
-// });
-
+Route::get('/home', 'HomeController@start');
 Route::get('/seasons', 'SeasonController@seasons');
+
+Route::post('/upload', 'XmlController@upload')->name('upload');

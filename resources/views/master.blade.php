@@ -53,7 +53,8 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="{{ URL::asset('js/bootstrap.min.js') }}"></script>
 
-    http://getbootstrap.com/components/#input-groups-buttons-dropdowns
+    <!-- <script src="{{ URL::asset('js/main.js') }}"></script> -->
+<!-- <script type="text/javascript" src="{{ URL::asset('js/main.js') }}"></script> -->
 
 </body>
 

@@ -8,8 +8,6 @@ use App\Models\Season;
 class SeasonController extends Controller
 {
 
-
-
     function __construct(Request $request){
 
 
@@ -19,12 +17,18 @@ class SeasonController extends Controller
     public function seasons(Request $request){
 
         // $seasons = Season::all()->orderBy('number', 'desc');
-        $seasons = Season::orderByDesc('number')->get();
+        $seasons = $this->getAllSeasons();
 
         return view('seasons', ['seasons' => $seasons]);
 
     }
 
+    public function getAllSeasons(){
 
+        $seasons = Season::orderByDesc('number')->get();
+
+        return $seasons;
+
+    }
 
 }

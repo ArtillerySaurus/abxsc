@@ -95,20 +95,12 @@ class XmlController extends Controller
         // Get creatures.
         $xmlCreaturesProcessed = $this->handleXmlCreatures($xmlContent->creatures);
         // Up season version.
-        if($season->databaseVersion <= 0){
-
-            $season->databaseVersion = 1;
-
-        }else{
-
-            $season->databaseVersion =+ 0.1;
-
-        }
+        $season->databaseVersion =+ 0.1;
 
         // Save season.
         $season->save();
 
-        return Redirect::back()->withErrors(['Grote kans dat het opgeslagen is!']);// @TODO: Find some other way to do this!
+        return Redirect::back()->withErrors(['Grote kans dat het opgeslagen is! Maar zeker weten doen we het niet!']);// @TODO: Find some other way to do this!
 
     }
 
